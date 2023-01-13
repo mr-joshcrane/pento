@@ -1,0 +1,39 @@
+<div>
+  <h2> Current Transaction: </h2>
+  <table>
+    <tr>
+      <th> Date </th>
+      <th> Description </th>
+      <th> Amount </th>
+      <th> Type </th>
+    </tr>
+    <tr>
+      <td> <%= @transaction.transaction_date %> </td>
+      <td> <%= @transaction.narration %> </td>
+      <td> <%= @transaction.debit || @transaction.credit %> </td>
+      <td> <%= @transaction.transaction_type %> </td>
+    </tr>
+  </table>
+</div>
+<div>
+  <h2> Tags: </h2>
+
+  <.form
+    let={f}
+    for={ @changeset }
+    id="tag-form"
+    phx-submit="save">
+
+    <%= label f, :tag %>
+    <%= text_input(
+        f,
+        :tagss,
+        name: "transaction[tagss][]",
+        autofocus: true) %>
+    <%= error_tag f, :tag %>
+  
+    <div>
+      <%= submit "Save", phx_disable_with: "Saving..." %>
+    </div>
+  </.form>
+</div>
